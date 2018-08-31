@@ -1,0 +1,23 @@
+{
+  "name": "bot-library",
+  "version": "1.0.11",
+  "description": "This is a generic bot library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bot",
+    "library"
+  ],
+  "author": "makeshkumar <mahesh.mmk48@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "json-mapper": "0.0.12",
+    "mongodb": "^3.1.4",
+    "node-emoji": "^1.8.1",
+    "q": "^1.5.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  }
+}
