@@ -27,7 +27,7 @@ class Database{
                 _this.database = db;
                 _this.isUp = true;
             }
-            });
+        });
     }
 
 
@@ -84,6 +84,20 @@ class Database{
 
         return deferred.promise;
     }
+
+    getData(table,field){
+
+        console.log('Requested to get ' + table);
+       // Get the documents collection
+       var collection = this.database.db(this.dbName).collection(table);
+       console.log(field);
+ 
+       var deferred = q.defer();
+
+        deferred.resolve(collection.distinct(field));
+
+       return deferred.promise;
+   }
 
     insertDocument(table,record){
 
