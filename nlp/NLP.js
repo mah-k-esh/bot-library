@@ -13,9 +13,22 @@ class NLP{
     }
 
 
+    fetchResponseFromIntent(intentName){
+        
+        var response = {};
+
+        return response;
+    }
+
     changeResponseStructure(input){
 
         var result = input;
+
+
+        //get intent name
+        var intentName = "";
+
+        var response = this.fetchResponseFromIntent(intentName);
 
         //modify the result to certain format//
 
@@ -44,8 +57,19 @@ class NLP{
 
     getDialogFlowResponse(query){
 
-        var response = this.changeResponseStructure({});
+        //TODO: when you get time put these string litrals to constants file
+        var deferred = q.defer();
 
+        this.network.getResponse("DIALOGFLOW",{"qs":{"query":query}})
+            .then(resp=>{
+                //console.log(resp);
+                var filteredResponse = this.changeResponseStructure(resp);
+
+                deferred.resolve(filteredResponse);
+            })
+            .catch(err=>{deferred.reject(err)});
+
+        return deferred.promise;
 
     }
 
