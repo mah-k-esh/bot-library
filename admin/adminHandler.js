@@ -6,15 +6,49 @@ class AdminHandler{
     constructor(database){
         this.database = database;
         this.router = expressRouter;
+        
+        this.config = {
+            "nlp": "luis",
+            "personality": "men",
+            "weatherEnabled": false,
+            "googleEnabled": false
+        };
 
         this.initialize();
     }
 
 
+    updateConfig(configUpdated){
+        this.config = configUpdated;
+    }
+
     initialize(){
 
 
         var _database = this.database;
+
+        var _config = this.config;
+
+        var _this = this;
+
+        /**UPDATE the config */
+        this.router.post('/config',function(req,res){
+
+            var body = req.body;
+        
+            _this.updateConfig(body);
+        
+            res.json({"success":"success"});
+        
+        });
+
+
+        /**GET the configurations */
+        this.router.get("/config",function(req,res){
+
+            res.json(_this.config);
+        });
+
         /* GET all API integrations */
         this.router.get("/api", function(req, res) {
         
@@ -39,7 +73,7 @@ class AdminHandler{
                     for(item in resp.record){
 
 
-                        console.log(JSON.stringify(item));
+                        //console.log(JSON.stringify(item));
 
                         var filteredItem = {};
                         filteredItem['name'] = resp.record[item]['api-id'];
@@ -75,7 +109,7 @@ class AdminHandler{
                 
                 function(resp){
                     
-                    console.log(resp);
+                    //console.log(resp);
 
                     //filter out the response
                     var response = {};
