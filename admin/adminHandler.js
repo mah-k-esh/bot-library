@@ -13,36 +13,108 @@ class AdminHandler{
 
     initialize(){
 
+
+        var _database = this.database;
         /* GET all API integrations */
-        router.get("/api", function(req, res) {
+        this.router.get("/api", function(req, res) {
         
+
+            //get the type
+            var type = req.query.type;
+            var query = {
+                "api-type": (type==null||type==undefined)?"":type
+            }
+
+
             //get all document from DB
+            _database.getDocuments("api",query).then(
+                
+                function(resp){
+                    
+                    //filter out the response
+                    var item={};
 
-            //filer out the response
+                    var response = [];
 
-            //return the response
+                    for(item in resp.record){
 
+
+                        console.log(JSON.stringify(item));
+
+                        var filteredItem = {};
+                        filteredItem['name'] = resp.record[item]['api-id'];
+                        filteredItem['selected'] = resp.record[item]['selected'];
+
+
+
+                        response.push(filteredItem);
+
+                    }
+
+                    res.json(response)
+                    //return the response                
+                }
+
+            );
         });
 
         /*GET specific api details */
-        router.get("/api/{api-id}", function(req, res) {
+        this.router.get("/api/:api_id", function(req, res) {
 
-            //get the specific document form DB
+    
+            //get the type
+            var type = req.params.api_id;
 
-            //filter out the response
+            var query = {
+                "api-id": (type==null||type==undefined)?"":type
+            }
 
-            //return the response
+
+            //get all document from DB
+            _database.getDocuments("api",query).then(
+                
+                function(resp){
+                    
+                    console.log(resp);
+
+                    //filter out the response
+                    var response = {};
+                    if(resp.record.length > 0){
+                        response = resp.record[0];
+                    }
+
+                    res.json(response)
+                    //return the response                
+                }
+
+            );
 
         });
 
 
         /**UPDATE the api */
-        router.post("/api/{api-id}",function(req,res){
+        this.router.post("/api/:api_id",function(req,res){
             
+            //get the type
+            var type = req.params.api_id;
+
+            var query = {
+                "api-id": (type==null||type==undefined)?"":type
+            }
+
+
+            //get all document from DB
+            _database.updateDocument("api",query,req.body.data).then(
+                
+                function(resp){
+
+                    res.json(resp);
+                    //return the response                
+                }
+
+            );            
             //update a specific document 
 
-            //return the status
-            
         });
     }
 
@@ -67,3 +139,5 @@ class AdminHandler{
     }
 
 }
+
+module.exports = AdminHandler;

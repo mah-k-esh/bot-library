@@ -102,7 +102,7 @@ class NetworkCalls{
                         
                     }
 
-                    // console.log("config response is :",config["options"]);
+                    //  console.log("config response is :",config["options"]);
 
                     promise = requestPromise(config["options"]);
 

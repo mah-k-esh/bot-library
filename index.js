@@ -11,3 +11,4 @@ exports.Database = require("./database/Database");
 exports.CommonUtils = require("./utils/CommonUtils");
 exports.NLP = require("./nlp/NLP");
 exports.Emojis = require("./nlp/Emojis");
+exports.Admin = require("./admin/adminHandler");
