@@ -41,10 +41,16 @@ function debugNetworkCallGetResponse(){
     nlp.changePersonality("men");
 
     setTimeout(function(){    
-        nlp.getResponse('dialogFlow','start the payment process').then(resp=>console.log("pikachoo:"+JSON.stringify(resp)));
+        nlp.getResponse('dialogFlow','hi').then(resp=>console.log("pikachoo:"+JSON.stringify(resp)));
     },5000);
 
-    
+    setTimeout(function(){    
+        nlp.getResponse('dialogFlow','weather').then(resp=>console.log("pikachoo:"+JSON.stringify(resp)));
+    },7000);
+
+    setTimeout(function(){    
+        nlp.getResponse('dialogFlow','hi').then(resp=>console.log("pikachoo:"+JSON.stringify(resp)));
+    },8000);
 }
 
 debugNetworkCallGetResponse();

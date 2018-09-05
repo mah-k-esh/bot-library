@@ -50,7 +50,9 @@ class NLP{
 
                 }
 
-
+                if(intentName != ""){
+                    _response["type"] = intentName;
+                }
 
                 deferred.resolve(_response);
 
@@ -185,7 +187,7 @@ class NLP{
         //TODO: when you get time put these string litrals to constants file
         var deferred = q.defer();
 
-        this.network.getResponse("DIALOGFLOW",{"qs":{"query":query,"sessionId":this.sessionId}})
+        this.network.getResponse("DIALOGFLOW",{"qs":{"query":query,"sessionId":Math.round(Math.random()*97676567549845769849)}})
             .then(resp=>{
                 //console.log(resp);
                 this.changeResponseStructure("DIALOGFLOW",resp).then(resp=>{
@@ -204,7 +206,7 @@ class NLP{
         //TODO: when you get time put these string litrals to constants file
         var deferred = q.defer();
 
-        this.network.getResponse("DIALOGFLOW",{"qs":{"query":query,"sessionId":this.sessionId}})
+        this.network.getResponse("DIALOGFLOW",{"qs":{"query":query,"sessionId":Math.round(Math.random()*97676567549845769849)}})
             .then(resp=>{
                 //console.log(resp);
                 this.changeResponseStructure("DIALOGFLOW",resp).then(resp=>{
