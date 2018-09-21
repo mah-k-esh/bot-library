@@ -94,9 +94,9 @@ class NLP{
 
                 intentName = input.topScoringIntent.intent;
 
-                this.fetchResponseFromIntent(intentName).then(resp=>{_response=resp;
+                this.fetchResponseFromIntent(intentName).then(resp=>{
                     
-                    deferred.resolve(_response);
+                    deferred.resolve(resp);
                 });
                 
             }
@@ -109,13 +109,15 @@ class NLP{
                     
                     intentName = input.result.metadata.intentName;
                     
-                    this.fetchResponseFromIntent(intentName).then(resp=>{_response=resp;
+                    this.fetchResponseFromIntent(intentName).then(resp=>{
                         
-                        deferred.resolve(_response);
+                        deferred.resolve(resp);
 
                     });
 
                 }else{
+
+                    _response = this.defaultResponse;
 
                     if(intentName == ""){
                     
@@ -147,7 +149,7 @@ class NLP{
 
             }catch(err){
                 // console.log(err);
-                deferred.reject(_response);
+                deferred.reject(this.defaultResponse);
             }
 
         }
